@@ -1,6 +1,6 @@
-# Primera parte
+# **Primera parte**
 
-## Proyecto: Juguetería 0494
+## **Proyecto: Juguetería 0494**
 
 - **Lenguaje**: Python
 - **Framework**: Django
@@ -8,26 +8,26 @@
 
 ---
 
-### Procedimiento para crear carpeta del Proyecto
+### **Procedimiento para crear carpeta del Proyecto**
 
 - **Nombre de la carpeta**: `UIII_Jugueteria_0494`
 
 ---
 
-### Procedimiento para abrir VS Code sobre la carpeta
+### **Procedimiento para abrir VS Code sobre la carpeta**
 
 1. Abre Visual Studio Code.
 2. En el menú, selecciona **Archivo > Abrir carpeta** y selecciona la carpeta `UIII_Jugueteria_0494`.
 
 ---
 
-### Procedimiento para abrir terminal en VS Code
+### **Procedimiento para abrir terminal en VS Code**
 
 1. En Visual Studio Code, ve al menú **Ver > Terminal** o usa el atajo **Ctrl + `** (grave).
 
 ---
 
-### Procedimiento para crear carpeta entorno virtual `.venv` desde terminal de VS Code
+### **Procedimiento para crear carpeta entorno virtual `.venv` desde terminal de VS Code**
 
 En la terminal de VS Code, escribe:
 
@@ -266,11 +266,3 @@ Finalmente, ejecuta el servidor en el puerto 8012:
 bash
 Copiar código
 python manage.py runserver 8012
-css
-Copiar código
-
-Este texto ya está estructurado para ser colocado como archivo `leeme_primera_parte.md` en tu repositorio de GitHub. Puedes pegarlo tal cual para documentar el proceso y las configuraciones de tu proyecto. ¿Te gustaría ayuda con algún otro archivo o parte del proyecto?
-
-
-
-
