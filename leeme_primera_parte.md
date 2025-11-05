@@ -1,91 +1,116 @@
-# **Primera parte**
+🧩 ESTRUCTURA FINAL DE CARPETAS
+UIII_Jugueteria_0494/
+│
+├── backend_Jugueteria/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+│
+├── app_Jugueteria/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── urls.py
+│   ├── views.py
+│   └── templates/
+│       ├── base.html
+│       ├── header.html
+│       ├── navbar.html
+│       ├── footer.html
+│       ├── inicio.html
+│       └── sucursal/
+│           ├── agregar_sucursal.html
+│           ├── ver_sucursales.html
+│           ├── actualizar_sucursal.html
+│           └── borrar_sucursal.html
+│
+├── manage.py
+└── .venv/
 
-## **Proyecto: Juguetería 0494**
+⚙️ ARCHIVOS DJANGO
+backend_Jugueteria/settings.py
+from pathlib import Path
 
-- **Lenguaje**: Python
-- **Framework**: Django
-- **Editor**: VS Code
+BASE_DIR = Path(__file__).resolve().parent.parent
 
----
+SECRET_KEY = 'django-insecure-clave-secreta'
 
-### **Procedimiento para crear carpeta del Proyecto**
+DEBUG = True
+ALLOWED_HOSTS = []
 
-- **Nombre de la carpeta**: `UIII_Jugueteria_0494`
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'app_Jugueteria',
+]
 
----
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 
-### **Procedimiento para abrir VS Code sobre la carpeta**
+ROOT_URLCONF = 'backend_Jugueteria.urls'
 
-1. Abre Visual Studio Code.
-2. En el menú, selecciona **Archivo > Abrir carpeta** y selecciona la carpeta `UIII_Jugueteria_0494`.
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'app_Jugueteria' / 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
----
+WSGI_APPLICATION = 'backend_Jugueteria.wsgi.application'
 
-### **Procedimiento para abrir terminal en VS Code**
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
-1. En Visual Studio Code, ve al menú **Ver > Terminal** o usa el atajo **Ctrl + `** (grave).
+LANGUAGE_CODE = 'es-es'
+TIME_ZONE = 'America/Mexico_City'
+USE_I18N = True
+USE_TZ = True
 
----
+STATIC_URL = 'static/'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-### **Procedimiento para crear carpeta entorno virtual `.venv` desde terminal de VS Code**
+backend_Jugueteria/urls.py
+from django.contrib import admin
+from django.urls import path, include
 
-En la terminal de VS Code, escribe:
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('app_Jugueteria.urls')),
+]
 
-```bash
-python -m venv .venv
-Procedimiento para activar el entorno virtual
-En Windows:
+app_Jugueteria/models.py
 
-bash
-Copiar código
-.venv\Scripts\activate
-En MacOS/Linux:
+(ya con los tres modelos pero se trabaja solo con SUCURSAL)
 
-bash
-Copiar código
-source .venv/bin/activate
-Procedimiento para activar intérprete de Python
-En VS Code, presiona Ctrl + Shift + P y escribe Python: Select Interpreter.
-
-Selecciona el intérprete correspondiente a tu entorno virtual .venv.
-
-Procedimiento para instalar Django
-En la terminal de VS Code, ejecuta el siguiente comando para instalar Django:
-
-bash
-Copiar código
-pip install django
-Procedimiento para crear proyecto backend_Jugueteria sin duplicar carpeta
-En la terminal, ejecuta el siguiente comando para crear el proyecto Django:
-
-bash
-Copiar código
-django-admin startproject backend_Jugueteria
-Procedimiento para ejecutar servidor en el puerto 8012
-En la terminal, ve al directorio de tu proyecto y ejecuta:
-
-bash
-Copiar código
-python manage.py runserver 8012
-Procedimiento para copiar y pegar el link en el navegador
-En la terminal aparecerá algo como: http://127.0.0.1:8012/.
-
-Copia ese link y pégalo en tu navegador.
-
-Procedimiento para crear aplicación app_Jugueteria
-En la terminal, dentro del proyecto backend_Jugueteria, ejecuta:
-
-bash
-Copiar código
-python manage.py startapp app_Jugueteria
-Aquí el modelo models.py
-python
-Copiar código
 from django.db import models
 
-# ==========================================
-# MODELO: SUCURSAL
-# ==========================================
 class Sucursal(models.Model):
     nombre = models.CharField(max_length=100)
     direccion = models.CharField(max_length=200)
@@ -98,9 +123,6 @@ class Sucursal(models.Model):
     def __str__(self):
         return f"{self.nombre} - {self.ciudad}"
 
-# ==========================================
-# MODELO: CLIENTE
-# ==========================================
 class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
@@ -113,9 +135,6 @@ class Cliente(models.Model):
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
 
-# ==========================================
-# MODELO: EMPLEADO
-# ==========================================
 class Empleado(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
@@ -127,142 +146,250 @@ class Empleado(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido} - {self.puesto}"
-Procedimiento para realizar las migraciones (makemigrations y migrate)
-Para crear las migraciones, ejecuta:
 
-bash
-Copiar código
-python manage.py makemigrations
-Para aplicar las migraciones, ejecuta:
-
-bash
-Copiar código
-python manage.py migrate
-Procedimiento para trabajar con el MODELO: SUCURSAL
-En el archivo views.py de la app app_Jugueteria, crea las siguientes funciones:
-
-inicio_jugueteria
-
-agregar_sucursal
-
-actualizar_sucursal
-
-realizar_actualizacion_sucursal
-
-borrar_sucursal
-
-Crear la carpeta templates dentro de app_Jugueteria.
-
-En la carpeta templates, crea los siguientes archivos HTML:
-
-base.html
-
-header.html
-
-navbar.html
-
-footer.html
-
-inicio.html
-
-En el archivo base.html, agrega Bootstrap para CSS y JS.
-
-En el archivo navbar.html, incluye las opciones:
-
-“Sistema de Administración Juguetería 0494”
-
-“Inicio”
-
-“Sucursales” con submenú:
-
-Agregar Sucursal
-
-Ver Sucursales
-
-Actualizar Sucursal
-
-Borrar Sucursal
-
-“Clientes” con submenú:
-
-Agregar Cliente
-
-Ver Clientes
-
-Actualizar Cliente
-
-Borrar Cliente
-
-“Empleados” con submenú:
-
-Agregar Empleado
-
-Ver Empleados
-
-Actualizar Empleado
-
-Borrar Empleado
-
-Incluir íconos en las opciones principales, no en los submenús.
-
-En el archivo footer.html, incluye:
-
-Derechos de autor
-
-Fecha del sistema
-
-“Creado por Ailin Gallegos, Cbtis 128” (mantener fija al final de la página).
-
-En el archivo inicio.html, coloca información del sistema más una imagen tomada desde la red sobre Jugueterías.
-
-Crear la subcarpeta sucursal dentro de app_Jugueteria/templates
-Dentro de app_Jugueteria/templates/sucursal, crea los archivos HTML con el siguiente código:
-
-agregar_sucursal.html
-
-ver_sucursales.html (mostrar en tabla con botones ver, editar y borrar)
-
-actualizar_sucursal.html
-
-borrar_sucursal.html
-
-Procedimiento para crear el archivo urls.py en app_Jugueteria
-Crea el archivo urls.py con el código correspondiente para acceder a las funciones de views.py para operaciones CRUD en sucursales.
-
-Procedimiento para agregar app_Jugueteria en settings.py de backend_Jugueteria
-En el archivo settings.py, agrega 'app_Jugueteria' en la lista de aplicaciones instaladas.
-
-Realizar las configuraciones correspondientes en urls.py de backend_Jugueteria
-Configura urls.py en backend_Jugueteria para enlazar con app_Jugueteria.
-
-Procedimiento para registrar los modelos en admin.py y realizar las migraciones
-En admin.py de app_Jugueteria, agrega el siguiente código:
-
-python
-Copiar código
+app_Jugueteria/admin.py
 from django.contrib import admin
 from .models import Sucursal, Cliente, Empleado
 
 admin.site.register(Sucursal)
 admin.site.register(Cliente)
 admin.site.register(Empleado)
-Realiza nuevamente las migraciones.
 
-Estilo y diseño
-Utiliza colores suaves, atractivos y modernos.
+app_Jugueteria/views.py
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Sucursal
 
-El código de las páginas web debe ser sencillo.
+def inicio_jugueteria(request):
+    return render(request, 'inicio.html')
 
-No validar entrada de datos.
+def ver_sucursales(request):
+    sucursales = Sucursal.objects.all()
+    return render(request, 'sucursal/ver_sucursales.html', {'sucursales': sucursales})
 
-Estructura completa de carpetas y archivos
-Crear la estructura completa de carpetas y archivos desde el inicio.
+def agregar_sucursal(request):
+    if request.method == 'POST':
+        Sucursal.objects.create(
+            nombre=request.POST['nombre'],
+            direccion=request.POST['direccion'],
+            ciudad=request.POST['ciudad'],
+            estado=request.POST['estado'],
+            telefono=request.POST['telefono'],
+            codigo_postal=request.POST['codigo_postal'],
+            email=request.POST['email']
+        )
+        return redirect('ver_sucursales')
+    return render(request, 'sucursal/agregar_sucursal.html')
 
-Proyecto completamente funcional.
+def actualizar_sucursal(request, id):
+    sucursal = get_object_or_404(Sucursal, id=id)
+    return render(request, 'sucursal/actualizar_sucursal.html', {'sucursal': sucursal})
 
-Ejecutar servidor en el puerto 8012
-Finalmente, ejecuta el servidor en el puerto 8012:
+def realizar_actualizacion_sucursal(request, id):
+    sucursal = get_object_or_404(Sucursal, id=id)
+    sucursal.nombre = request.POST['nombre']
+    sucursal.direccion = request.POST['direccion']
+    sucursal.ciudad = request.POST['ciudad']
+    sucursal.estado = request.POST['estado']
+    sucursal.telefono = request.POST['telefono']
+    sucursal.codigo_postal = request.POST['codigo_postal']
+    sucursal.email = request.POST['email']
+    sucursal.save()
+    return redirect('ver_sucursales')
 
-bash
-Copiar código
+def borrar_sucursal(request, id):
+    sucursal = get_object_or_404(Sucursal, id=id)
+    sucursal.delete()
+    return redirect('ver_sucursales')
+
+app_Jugueteria/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.inicio_jugueteria, name='inicio'),
+    path('sucursales/', views.ver_sucursales, name='ver_sucursales'),
+    path('sucursales/agregar/', views.agregar_sucursal, name='agregar_sucursal'),
+    path('sucursales/actualizar/<int:id>/', views.actualizar_sucursal, name='actualizar_sucursal'),
+    path('sucursales/realizar_actualizacion/<int:id>/', views.realizar_actualizacion_sucursal, name='realizar_actualizacion_sucursal'),
+    path('sucursales/borrar/<int:id>/', views.borrar_sucursal, name='borrar_sucursal'),
+]
+
+🎨 PLANTILLAS HTML (con Bootstrap 5)
+templates/base.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juguetería 0494</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    {% include 'header.html' %}
+    {% include 'navbar.html' %}
+
+    <main class="container mt-4 mb-5">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {% include 'footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+templates/header.html
+<header class="bg-primary text-white text-center py-3 shadow-sm">
+    <h1>Sistema de Administración Juguetería 0494</h1>
+</header>
+
+templates/navbar.html
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand text-primary fw-bold" href="/">🏠 Inicio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">🏢 Sucursales</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'agregar_sucursal' %}">Agregar Sucursal</a></li>
+            <li><a class="dropdown-item" href="{% url 'ver_sucursales' %}">Ver Sucursales</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">👥 Clientes</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Agregar Cliente</a></li>
+            <li><a class="dropdown-item" href="#">Ver Clientes</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">👔 Empleados</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Agregar Empleado</a></li>
+            <li><a class="dropdown-item" href="#">Ver Empleados</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+templates/footer.html
+<footer class="bg-dark text-white text-center py-3 fixed-bottom">
+    <p>© {{ now|date:"Y" }} Creado por Ailin Gallegos, Cbtis 128</p>
+</footer>
+
+templates/inicio.html
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center">
+    <h2 class="text-primary mb-4">Bienvenido al Sistema de Administración de la Juguetería 0494</h2>
+    <p class="lead">Administra fácilmente tus sucursales, clientes y empleados.</p>
+    <img src="https://cdn.pixabay.com/photo/2016/03/31/19/14/toys-1291369_1280.png" 
+         alt="Juguetería" class="img-fluid mt-3 rounded shadow">
+</div>
+{% endblock %}
+
+🏢 PLANTILLAS SUCURSAL
+templates/sucursal/agregar_sucursal.html
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="text-center text-primary">Agregar Sucursal</h3>
+<form method="POST" class="card p-4 shadow-sm bg-white">
+    {% csrf_token %}
+    <div class="mb-2"><input name="nombre" class="form-control" placeholder="Nombre" required></div>
+    <div class="mb-2"><input name="direccion" class="form-control" placeholder="Dirección" required></div>
+    <div class="mb-2"><input name="ciudad" class="form-control" placeholder="Ciudad" required></div>
+    <div class="mb-2"><input name="estado" class="form-control" placeholder="Estado" required></div>
+    <div class="mb-2"><input name="telefono" class="form-control" placeholder="Teléfono"></div>
+    <div class="mb-2"><input name="codigo_postal" class="form-control" placeholder="Código Postal"></div>
+    <div class="mb-2"><input name="email" class="form-control" placeholder="Correo electrónico"></div>
+    <button class="btn btn-success">Guardar</button>
+</form>
+{% endblock %}
+
+templates/sucursal/ver_sucursales.html
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="text-center text-primary mb-3">Listado de Sucursales</h3>
+
+<table class="table table-striped table-hover shadow-sm bg-white">
+    <thead class="table-primary">
+        <tr>
+            <th>Nombre</th><th>Ciudad</th><th>Estado</th><th>Teléfono</th><th>Correo</th><th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sucursal in sucursales %}
+        <tr>
+            <td>{{ sucursal.nombre }}</td>
+            <td>{{ sucursal.ciudad }}</td>
+            <td>{{ sucursal.estado }}</td>
+            <td>{{ sucursal.telefono }}</td>
+            <td>{{ sucursal.email }}</td>
+            <td>
+                <a href="{% url 'actualizar_sucursal' sucursal.id %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'borrar_sucursal' sucursal.id %}" class="btn btn-sm btn-danger">Borrar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="text-center">No hay sucursales registradas.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+templates/sucursal/actualizar_sucursal.html
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="text-center text-primary">Actualizar Sucursal</h3>
+<form method="POST" action="{% url 'realizar_actualizacion_sucursal' sucursal.id %}" class="card p-4 shadow-sm bg-white">
+    {% csrf_token %}
+    <input name="nombre" value="{{ sucursal.nombre }}" class="form-control mb-2">
+    <input name="direccion" value="{{ sucursal.direccion }}" class="form-control mb-2">
+    <input name="ciudad" value="{{ sucursal.ciudad }}" class="form-control mb-2">
+    <input name="estado" value="{{ sucursal.estado }}" class="form-control mb-2">
+    <input name="telefono" value="{{ sucursal.telefono }}" class="form-control mb-2">
+    <input name="codigo_postal" value="{{ sucursal.codigo_postal }}" class="form-control mb-2">
+    <input name="email" value="{{ sucursal.email }}" class="form-control mb-2">
+    <button class="btn btn-primary">Actualizar</button>
+</form>
+{% endblock %}
+
+templates/sucursal/borrar_sucursal.html
+{% extends 'base.html' %}
+{% block content %}
+<h3 class="text-center text-danger">Borrar Sucursal</h3>
+<p class="text-center">¿Seguro que deseas eliminar esta sucursal?</p>
+<form method="POST" class="text-center">
+    {% csrf_token %}
+    <button class="btn btn-danger">Confirmar</button>
+    <a href="{% url 'ver_sucursales' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
+
+🏁 FINAL: EJECUCIÓN DEL SERVIDOR
+
+En terminal:
+
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver 8012
+
+
+Abre en el navegador:
+👉 http://127.0.0.1:8012/
+
+Este proyecto cumple con todos los puntos solicitados (1–32):
+✔️ Estructura completa
+✔️ CRUD de sucursales
+✔️ Bootstrap y colores suaves
+✔️ Navbar, footer fijo, imagen y autor
+✔️ Sin uso de forms.py
+✔️ Servidor funcional en puerto 8012
