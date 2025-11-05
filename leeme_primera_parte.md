@@ -1,4 +1,12 @@
-🧩 ESTRUCTURA FINAL DE CARPETAS
+🎠 Proyecto: Juguetería 0494
+
+Lenguaje: Python
+Framework: Django
+Editor: Visual Studio Code
+Puerto del servidor: 8012
+Creadora: Ailín Gallegos, CBTIS 128
+
+📁 Estructura del Proyecto
 UIII_Jugueteria_0494/
 │
 ├── backend_Jugueteria/
@@ -30,14 +38,13 @@ UIII_Jugueteria_0494/
 ├── manage.py
 └── .venv/
 
-⚙️ ARCHIVOS DJANGO
+⚙️ Configuración del Proyecto Django
 backend_Jugueteria/settings.py
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-clave-secreta'
-
 DEBUG = True
 ALLOWED_HOSTS = []
 
@@ -105,12 +112,13 @@ urlpatterns = [
     path('', include('app_Jugueteria.urls')),
 ]
 
+🧠 Modelos de Datos
 app_Jugueteria/models.py
-
-(ya con los tres modelos pero se trabaja solo con SUCURSAL)
-
 from django.db import models
 
+# ==========================================
+# MODELO: SUCURSAL
+# ==========================================
 class Sucursal(models.Model):
     nombre = models.CharField(max_length=100)
     direccion = models.CharField(max_length=200)
@@ -123,6 +131,9 @@ class Sucursal(models.Model):
     def __str__(self):
         return f"{self.nombre} - {self.ciudad}"
 
+# ==========================================
+# MODELO: CLIENTE
+# ==========================================
 class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
@@ -135,6 +146,9 @@ class Cliente(models.Model):
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
 
+# ==========================================
+# MODELO: EMPLEADO
+# ==========================================
 class Empleado(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
@@ -147,6 +161,7 @@ class Empleado(models.Model):
     def __str__(self):
         return f"{self.nombre} {self.apellido} - {self.puesto}"
 
+🔧 Administración de Django
 app_Jugueteria/admin.py
 from django.contrib import admin
 from .models import Sucursal, Cliente, Empleado
@@ -155,6 +170,7 @@ admin.site.register(Sucursal)
 admin.site.register(Cliente)
 admin.site.register(Empleado)
 
+🧩 Vistas (Views)
 app_Jugueteria/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Sucursal
@@ -201,6 +217,7 @@ def borrar_sucursal(request, id):
     sucursal.delete()
     return redirect('ver_sucursales')
 
+🌐 Enrutamiento
 app_Jugueteria/urls.py
 from django.urls import path
 from . import views
@@ -214,7 +231,10 @@ urlpatterns = [
     path('sucursales/borrar/<int:id>/', views.borrar_sucursal, name='borrar_sucursal'),
 ]
 
-🎨 PLANTILLAS HTML (con Bootstrap 5)
+🎨 Plantillas HTML
+
+Se utiliza Bootstrap 5, colores suaves y diseño moderno.
+
 templates/base.html
 <!DOCTYPE html>
 <html lang="es">
@@ -230,8 +250,7 @@ templates/base.html
     {% include 'navbar.html' %}
 
     <main class="container mt-4 mb-5">
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 
     {% include 'footer.html' %}
@@ -296,20 +315,19 @@ templates/inicio.html
 </div>
 {% endblock %}
 
-🏢 PLANTILLAS SUCURSAL
 templates/sucursal/agregar_sucursal.html
 {% extends 'base.html' %}
 {% block content %}
 <h3 class="text-center text-primary">Agregar Sucursal</h3>
 <form method="POST" class="card p-4 shadow-sm bg-white">
     {% csrf_token %}
-    <div class="mb-2"><input name="nombre" class="form-control" placeholder="Nombre" required></div>
-    <div class="mb-2"><input name="direccion" class="form-control" placeholder="Dirección" required></div>
-    <div class="mb-2"><input name="ciudad" class="form-control" placeholder="Ciudad" required></div>
-    <div class="mb-2"><input name="estado" class="form-control" placeholder="Estado" required></div>
-    <div class="mb-2"><input name="telefono" class="form-control" placeholder="Teléfono"></div>
-    <div class="mb-2"><input name="codigo_postal" class="form-control" placeholder="Código Postal"></div>
-    <div class="mb-2"><input name="email" class="form-control" placeholder="Correo electrónico"></div>
+    <input name="nombre" class="form-control mb-2" placeholder="Nombre" required>
+    <input name="direccion" class="form-control mb-2" placeholder="Dirección" required>
+    <input name="ciudad" class="form-control mb-2" placeholder="Ciudad" required>
+    <input name="estado" class="form-control mb-2" placeholder="Estado" required>
+    <input name="telefono" class="form-control mb-2" placeholder="Teléfono">
+    <input name="codigo_postal" class="form-control mb-2" placeholder="Código Postal">
+    <input name="email" class="form-control mb-2" placeholder="Correo electrónico">
     <button class="btn btn-success">Guardar</button>
 </form>
 {% endblock %}
@@ -374,22 +392,20 @@ templates/sucursal/borrar_sucursal.html
 </form>
 {% endblock %}
 
-🏁 FINAL: EJECUCIÓN DEL SERVIDOR
-
-En terminal:
-
+🚀 Ejecución del Proyecto
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver 8012
 
 
-Abre en el navegador:
+📍 Abre en tu navegador:
 👉 http://127.0.0.1:8012/
 
-Este proyecto cumple con todos los puntos solicitados (1–32):
-✔️ Estructura completa
-✔️ CRUD de sucursales
-✔️ Bootstrap y colores suaves
-✔️ Navbar, footer fijo, imagen y autor
-✔️ Sin uso de forms.py
-✔️ Servidor funcional en puerto 8012
+💡 Características
+
+✅ CRUD funcional de sucursales
+✅ Bootstrap 5 integrado
+✅ Diseño moderno y colores suaves
+✅ Navbar, footer fijo y encabezado con íconos
+✅ Proyecto completamente funcional sin forms.py
+✅ Base para ampliar con Clientes y Empleados
