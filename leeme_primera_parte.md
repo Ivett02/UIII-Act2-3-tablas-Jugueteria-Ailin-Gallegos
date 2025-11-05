@@ -7,36 +7,37 @@ Puerto del servidor: 8012
 Creadora: Ailín Gallegos, CBTIS 128
 
 📁 Estructura del Proyecto
-    UIII_Jugueteria_0494/
-    │
-    ├── backend_Jugueteria/
-    │   ├── __init__.py
-    │   ├── asgi.py
-    │   ├── settings.py
-    │   ├── urls.py
-    │   └── wsgi.py
-    │
-    ├── app_Jugueteria/
-    │   ├── __init__.py
-    │   ├── admin.py
-    │   ├── apps.py
-    │   ├── models.py
-    │   ├── urls.py
-    │   ├── views.py
-    │   └── templates/
-    │       ├── base.html
-    │       ├── header.html
-    │       ├── navbar.html
-    │       ├── footer.html
-    │       ├── inicio.html
-    │       └── sucursal/
-    │           ├── agregar_sucursal.html
-    │           ├── ver_sucursales.html
-    │           ├── actualizar_sucursal.html
-    │           └── borrar_sucursal.html
-    │
-    ├── manage.py
-    └── .venv/
+
+        UIII_Jugueteria_0494/
+        │
+        ├── backend_Jugueteria/
+        │   ├── __init__.py
+        │   ├── asgi.py
+        │   ├── settings.py
+        │   ├── urls.py
+        │   └── wsgi.py
+        │
+        ├── app_Jugueteria/
+        │   ├── __init__.py
+        │   ├── admin.py
+        │   ├── apps.py
+        │   ├── models.py
+        │   ├── urls.py
+        │   ├── views.py
+        │   └── templates/
+        │       ├── base.html
+        │       ├── header.html
+        │       ├── navbar.html
+        │       ├── footer.html
+        │       ├── inicio.html
+        │       └── sucursal/
+        │           ├── agregar_sucursal.html
+        │           ├── ver_sucursales.html
+        │           ├── actualizar_sucursal.html
+        │           └── borrar_sucursal.html
+        │
+        ├── manage.py
+        └── .venv/
 
 ⚙️ Configuración del Proyecto Django
 backend_Jugueteria/settings.py
