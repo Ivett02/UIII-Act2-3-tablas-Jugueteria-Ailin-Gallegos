@@ -40,6 +40,7 @@ Creadora: Ailín Gallegos, CBTIS 128
 
 ⚙️ Configuración del Proyecto Django
 backend_Jugueteria/settings.py
+
     from pathlib import Path
     
     BASE_DIR = Path(__file__).resolve().parent.parent
